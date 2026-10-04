@@ -28,3 +28,9 @@ export async function setValue(page: Page, selector: string, value: string): Pro
 			el.dispatchEvent(new Event('input', { bubbles: true }));
 		}, value);
 }
+
+/** Navigates and waits until Svelte has hydrated, so handlers are attached before the test acts. */
+export async function open(page: Page, path: string): Promise<void> {
+	await page.goto(path);
+	await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+}

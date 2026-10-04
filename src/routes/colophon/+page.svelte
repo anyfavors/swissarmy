@@ -10,7 +10,8 @@
 	<p>
 		Every tool is plain JavaScript running in your browser. There is no backend, no analytics and no
 		cookies. Input is kept in the URL fragment (the part after <code>#</code>) so links can be
-		shared; browsers never send the fragment to a server.
+		shared; browsers never send the fragment to a server. Tokens, keys, passwords and certificates
+		are never written there.
 	</p>
 
 	<h2><span class="sec">§2</span> The browser enforces it</h2>

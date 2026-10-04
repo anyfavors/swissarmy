@@ -13,6 +13,8 @@
 	const next: Record<Edition, Edition> = { auto: 'paper', paper: 'blueprint', blueprint: 'auto' };
 
 	onMount(() => {
+		// Marks the page as interactive; the browser tests wait for it before using shortcuts.
+		document.documentElement.dataset.hydrated = '';
 		const saved = document.documentElement.dataset.theme;
 		if (saved === 'paper' || saved === 'blueprint') edition = saved;
 	});
