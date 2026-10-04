@@ -8,7 +8,10 @@ import { version } from '$app/env';
  * DNS-over-HTTPS lookups and anything else cross-origin go straight to the network.
  */
 const CACHE = `fm-${version}`;
-const PRECACHE = [...immutable, ...assets, ...prerendered].map((f) => f.path);
+// Manifest paths are relative to the base path and the front page is the empty string.
+// Resolve them against the scope, otherwise "" would resolve to this script's own URL.
+const scope = self.registration.scope;
+const PRECACHE = [...immutable, ...assets, ...prerendered].map((f) => new URL(f.path, scope).href);
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -44,7 +47,7 @@ self.addEventListener('fetch', (event) => {
 			try {
 				return await fetch(req);
 			} catch {
-				return (await cache.match('/')) ?? Response.error();
+				return (await cache.match(scope)) ?? Response.error();
 			}
 		})()
 	);
