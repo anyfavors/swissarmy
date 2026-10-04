@@ -1,0 +1,285 @@
+@import '@fontsource/atkinson-hyperlegible-next/400.css';
+@import '@fontsource/atkinson-hyperlegible-next/700.css';
+@import '@fontsource/atkinson-hyperlegible-mono/400.css';
+@import '@fontsource/atkinson-hyperlegible-mono/700.css';
+
+/*
+ * Two editions of the manual:
+ *   paper     – off-white stock, black ink, Swiss red as the only signal colour
+ *   blueprint – cyanotype blue, white lines, safety yellow as signal
+ */
+:root {
+	--paper: #f3f0e8;
+	--field: #fbfaf6;
+	--ink: #17171a;
+	--ink-2: #55524b;
+	--rule: #17171a;
+	--rule-soft: #cfc9bb;
+	--signal: #c8102e;
+	--signal-ink: #ffffff;
+	--hilite: rgb(200 16 46 / 0.12);
+	--grid: transparent;
+
+	--font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+	--font-mono: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+
+	--measure: 72rem;
+	--gutter: clamp(1rem, 4vw, 2.5rem);
+
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='paper']) {
+		--paper: #12315e;
+		--field: #0d2850;
+		--ink: #eef3fa;
+		--ink-2: #a9bddb;
+		--rule: #dbe6f5;
+		--rule-soft: rgb(219 230 245 / 0.28);
+		--signal: #ffc94a;
+		--signal-ink: #12315e;
+		--hilite: rgb(255 201 74 / 0.18);
+		--grid: rgb(219 230 245 / 0.06);
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme='blueprint'] {
+	--paper: #12315e;
+	--field: #0d2850;
+	--ink: #eef3fa;
+	--ink-2: #a9bddb;
+	--rule: #dbe6f5;
+	--rule-soft: rgb(219 230 245 / 0.28);
+	--signal: #ffc94a;
+	--signal-ink: #12315e;
+	--hilite: rgb(255 201 74 / 0.18);
+	--grid: rgb(219 230 245 / 0.06);
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background-color: var(--paper);
+	background-image:
+		linear-gradient(var(--grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+	background-size: 24px 24px;
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: 1.0625rem;
+	line-height: 1.5;
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+a:hover {
+	text-decoration-color: var(--signal);
+	text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+	outline: 3px solid var(--signal);
+	outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.15;
+	margin: 0;
+}
+
+code,
+kbd,
+pre,
+.mono {
+	font-family: var(--font-mono);
+}
+
+.wrap {
+	max-width: var(--measure);
+	margin: 0 auto;
+	padding: 0 var(--gutter);
+}
+
+/* Small caps-style label used for running heads, field labels and stamps. */
+.label {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink-2);
+}
+
+/* Form controls */
+input[type='text'],
+input[type='search'],
+textarea,
+select {
+	width: 100%;
+	font: inherit;
+	font-family: var(--font-mono);
+	font-size: 1rem;
+	color: var(--ink);
+	background: var(--field);
+	border: 1px solid var(--rule);
+	border-radius: 0;
+	padding: 0.65rem 0.75rem;
+}
+
+textarea {
+	min-height: 9rem;
+	resize: vertical;
+	line-height: 1.45;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	outline: 3px solid var(--signal);
+	outline-offset: -1px;
+}
+
+button,
+.btn {
+	font: inherit;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--ink);
+	background: transparent;
+	border: 1px solid var(--rule);
+	border-radius: 0;
+	padding: 0.5rem 0.8rem;
+	min-height: 2.75rem;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+button:hover,
+.btn:hover {
+	background: var(--ink);
+	color: var(--paper);
+}
+
+button[aria-pressed='true'] {
+	background: var(--ink);
+	color: var(--paper);
+}
+
+.field {
+	display: grid;
+	gap: 0.35rem;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.error {
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	color: var(--signal);
+	border-left: 3px solid var(--signal);
+	padding: 0.25rem 0 0.25rem 0.6rem;
+	margin: 0;
+}
+
+.note {
+	font-size: 0.9375rem;
+	color: var(--ink-2);
+	border-left: 3px solid var(--rule-soft);
+	padding: 0.25rem 0 0.25rem 0.6rem;
+	margin: 0;
+}
+
+/* Readout: label / value rows, ruled like a datasheet. */
+.readout {
+	margin: 0;
+	border-top: 2px solid var(--rule);
+}
+
+.readout > div {
+	display: grid;
+	grid-template-columns: minmax(8rem, 14rem) 1fr auto;
+	gap: 0.25rem 1rem;
+	align-items: center;
+	padding: 0.45rem 0;
+	border-bottom: 1px solid var(--rule-soft);
+}
+
+.readout dt {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink-2);
+}
+
+.readout dd {
+	margin: 0;
+	font-family: var(--font-mono);
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 40rem) {
+	.readout > div {
+		grid-template-columns: 1fr auto;
+	}
+	.readout dt {
+		grid-column: 1 / -1;
+	}
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+.app {
+	display: contents;
+}
+
+/* Fallback in case the announcer's inline style is ever blocked by the CSP. */
+#svelte-announcer {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
