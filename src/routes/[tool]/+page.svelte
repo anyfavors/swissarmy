@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { chapterTitle, getTool, toolNumber } from '#lib/tools/registry.ts';
 	import Stamp from '#lib/ui/Stamp.svelte';
+	import { resolve } from '$app/paths';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -21,7 +22,12 @@
 		</p>
 		<h1>{meta.title}</h1>
 		<p class="sum">{meta.summary}</p>
-		<Stamp network={meta.network} />
+		<div class="row">
+			<Stamp network={meta.network} />
+			{#if meta.chain}
+				<a class="chainlink label" href={resolve('/chain')}>Usable as a step in Chain</a>
+			{/if}
+		</div>
 	</header>
 
 	{#key data.id}
@@ -51,6 +57,9 @@
 	h1 {
 		font-size: clamp(2rem, 6vw, 3.25rem);
 		letter-spacing: -0.015em;
+	}
+	.chainlink {
+		color: var(--ink);
 	}
 	.sum {
 		margin: 0;

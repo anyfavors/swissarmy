@@ -20,5 +20,6 @@ export const meta: ToolMeta = {
 		'rfc7519'
 	],
 	network: false,
-	detect: looksLikeJwt
+	detect: looksLikeJwt,
+	chain: { in: 'text', out: 'json' }
 };

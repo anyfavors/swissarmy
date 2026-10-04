@@ -34,3 +34,15 @@ export interface ToolMeta {
 export interface ToolModule {
 	default: Component;
 }
+
+/**
+ * One step a tool offers to the chain view (/chain). Each tool that can take text and return
+ * text exports `ops` from an ops.ts next to its logic. Steps throw an Error with a readable
+ * message when the input does not fit.
+ */
+export interface ChainOp {
+	/** Unique across the site, written as <tool id>.<op>, e.g. base64.decode. */
+	id: string;
+	label: string;
+	run: (input: string) => string | Promise<string>;
+}

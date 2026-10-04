@@ -18,5 +18,6 @@ export const meta: ToolMeta = {
 		'sha256sum',
 		'verify download'
 	],
-	network: false
+	network: false,
+	chain: { in: 'text', out: 'text' }
 };

@@ -46,6 +46,7 @@
 			</span>
 		</a>
 		<nav class="row" aria-label="Site">
+			<a class="btn" href={resolve('/chain')}>Chain</a>
 			<button type="button" onclick={() => palette.open()}>
 				Search <kbd class="hint">Ctrl K</kbd>
 			</button>
