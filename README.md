@@ -12,7 +12,11 @@ npm run dev      # http://localhost:5173
 npm test         # unit tests (Vitest)
 npm run check    # type check
 npm run build    # static site in build/, plus build/_headers
+npm run test:e2e # Playwright against build/ with the real headers (run build first)
 ```
+
+Playwright downloads its own Chromium in CI. Locally you can point it at an installed one with
+`PW_CHROMIUM=/path/to/chromium npm run test:e2e`.
 
 Node 22 (see `.nvmrc`). If a fresh `npm install` without a lockfile fails with
 `Cannot read properties of null (reading 'edgesOut')`, that is an npm 10 bug; use `npx npm@11 install`.
@@ -37,7 +41,13 @@ Rules that keep the site honest:
 - `network: false` means the tool makes no requests. A tool that does must list the hosts in `meta.network`
   and in `connectSrc` in `scripts/csp.js`, and must only send on an explicit button press.
 - No inline `style="..."` attributes and no inline scripts. The CSP blocks them. Use classes.
+- Never write secrets (tokens, keys, passwords, certificates) to the URL fragment.
 - Import from `#lib/...` with the file extension (`#lib/util/hash.ts`), as SvelteKit 3 requires.
+
+## Offline
+
+`src/service-worker/index.ts` precaches the whole build, so after one visit every tool works without
+a connection. Only same-origin GET requests are served from the cache.
 
 ## Security headers
 

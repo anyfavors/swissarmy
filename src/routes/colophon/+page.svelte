@@ -23,12 +23,18 @@
 
 	<h2><span class="sec">§3</span> Network use is marked</h2>
 	<p>
-		A tool that needs the network (for example a DNS lookup) carries a <strong>Network</strong>
+		A tool that needs the network (currently only the DNS lookup) carries a <strong>Network</strong>
 		stamp naming the host and what is sent. It only makes the request when you press its button, never
 		while you type. Every other tool carries a <strong>Local only</strong> stamp.
 	</p>
 
-	<h2><span class="sec">§4</span> Type</h2>
+	<h2><span class="sec">§4</span> Works offline</h2>
+	<p>
+		After your first visit the whole manual is stored by your browser, so every tool except the DNS
+		lookup works without a connection. You can also install it as an app from the browser menu.
+	</p>
+
+	<h2><span class="sec">§5</span> Type</h2>
 	<p>
 		Set in Atkinson Hyperlegible Next and Atkinson Hyperlegible Mono by the Braille Institute,
 		chosen because they keep 0/O, 1/l/I and rn/m apart. Fonts are served from this site.
