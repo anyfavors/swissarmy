@@ -193,6 +193,7 @@
 		<span class="label">Rules</span>
 		<button
 			type="button"
+			class="literal"
 			aria-pressed={excludeAmbiguous}
 			onclick={() => (excludeAmbiguous = !excludeAmbiguous)}>No 0 O 1 l I |</button
 		>
@@ -291,6 +292,11 @@
 {/if}
 
 <style>
+	/* Uppercasing would make l and I indistinguishable, which defeats the point of this button. */
+	.literal {
+		text-transform: none;
+	}
+
 	.opts {
 		margin: 1rem 0;
 	}
