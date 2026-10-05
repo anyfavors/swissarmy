@@ -68,6 +68,8 @@ export function looksLikeBase64(s: string): number {
 	const flat = t.replace(/\r?\n/g, '');
 	if (!/^[A-Za-z0-9+/_-]+={0,2}$/.test(flat)) return 0;
 	if (/^[0-9]+$/.test(flat) || /^[a-z]+$/i.test(flat)) return 0.05;
+	// Base64 of gzip data (magic 1f 8b) belongs to the compression tool, which ranks it at 0.8.
+	if (flat.startsWith('H4sI')) return 0.6;
 	let score = 0.5;
 	if (flat.endsWith('=')) score += 0.3;
 	if (flat.length % 4 === 0) score += 0.1;

@@ -50,5 +50,6 @@ describe('base64', () => {
 		expect(looksLikeBase64('SGVsbG8gd29ybGQ=')).toBeGreaterThan(0.7);
 		expect(looksLikeBase64('hello')).toBe(0);
 		expect(looksLikeBase64('1700000000')).toBeLessThan(0.1);
+		expect(looksLikeBase64('H4sIAAAAAAAAA8tIzcnJBwCGphA2BQAAAA==')).toBeLessThan(0.8);
 	});
 });
