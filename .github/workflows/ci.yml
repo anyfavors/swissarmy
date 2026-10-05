@@ -31,3 +31,23 @@ jobs:
             playwright-report
             test-results
           retention-days: 7
+
+  deploy:
+    # Production deploys only happen after the full test job passed on main.
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          # The hook URL is a bearer secret: anyone who has it can trigger builds.
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::Repository secret CF_DEPLOY_HOOK is not set"
+            exit 1
+          fi
+          curl --fail-with-body --silent --show-error --retry 3 --retry-all-errors -X POST "$HOOK"

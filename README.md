@@ -69,6 +69,12 @@ a connection. Only same-origin GET requests are served from the cache.
 
 Leave Cloudflare Web Analytics off for this project. It injects a script the CSP would block.
 
+### Deploys
+
+Production deploys are triggered by CI: after the `test` job passes on a push to `main`, the
+`deploy` job POSTs to a Cloudflare Pages deploy hook stored in the repository secret
+`CF_DEPLOY_HOOK`. The hook URL is a bearer secret and must never be committed.
+
 ## Design
 
 "Field manual" edition system: **paper** (off-white, black ink, Swiss red) and **blueprint**
