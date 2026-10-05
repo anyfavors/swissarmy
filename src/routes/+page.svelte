@@ -2,13 +2,13 @@
 	import { resolve } from '$app/paths';
 	import { toc, tools, toolNumber } from '#lib/tools/registry.ts';
 	import { detectTools } from '#lib/util/search.ts';
+	import { handOff } from '#lib/util/hash.ts';
 
 	let intake = $state('');
 	const matches = $derived(detectTools(intake, tools));
 
 	function href(id: string) {
-		const value = intake.trim();
-		return resolve('/[tool]', { tool: id }) + (value ? `#in=${encodeURIComponent(value)}` : '');
+		return resolve('/[tool]', { tool: id });
 	}
 </script>
 
@@ -43,7 +43,7 @@
 			<ol class="matches" aria-live="polite">
 				{#each matches as m (m.tool.id)}
 					<li>
-						<a class="btn" href={href(m.tool.id)}>
+						<a class="btn" href={href(m.tool.id)} onclick={() => handOff(intake.trim())}>
 							<span class="no">{toolNumber(m.tool)}</span>
 							{m.tool.title}
 						</a>

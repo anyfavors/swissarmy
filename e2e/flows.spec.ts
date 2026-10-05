@@ -29,6 +29,18 @@ test.describe('intake routes pasted values', () => {
 	}
 });
 
+test('pasted intake text never goes into the URL', async ({ page }) => {
+	const jwt =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U';
+	const urls: string[] = [];
+	page.on('framenavigated', (f) => urls.push(f.url()));
+	await open(page, '/');
+	await setValue(page, '#intake', jwt);
+	await page.locator('.matches a').first().click();
+	await expect(page.locator('main')).toContainText('1234567890');
+	expect(urls.concat(page.url()).filter((u) => u.includes('eyJ'))).toEqual([]);
+});
+
 test('tokens are not left in the address bar', async ({ page }) => {
 	const jwt =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U';
