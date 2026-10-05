@@ -131,6 +131,8 @@ pre,
 /* Form controls */
 input[type='text'],
 input[type='search'],
+input[type='password'],
+input[type='number'],
 textarea,
 select {
 	width: 100%;
