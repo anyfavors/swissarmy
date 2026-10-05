@@ -40,10 +40,14 @@ export function searchTools(query: string, tools: ToolMeta[]): ToolMeta[] {
 		.map((r) => r.t);
 }
 
-export function detectTools(input: string, tools: ToolMeta[]): { tool: ToolMeta; score: number }[] {
+export function detectTools(
+	input: string,
+	tools: ToolMeta[],
+	detectors: Map<string, (input: string) => number>
+): { tool: ToolMeta; score: number }[] {
 	if (!input.trim()) return [];
 	return tools
-		.map((tool) => ({ tool, score: tool.detect?.(input) ?? 0 }))
+		.map((tool) => ({ tool, score: detectors.get(tool.id)?.(input) ?? 0 }))
 		.filter((r) => r.score >= 0.3)
 		.sort((a, b) => b.score - a.score);
 }

@@ -8,11 +8,14 @@
 	let input: HTMLInputElement;
 	let query = $state('');
 	let active = $state(0);
-	const results = $derived(searchTools(query, tools));
+	// The list is only built while the dialog is open, so it isn't part of every page's HTML.
+	let isOpen = $state(false);
+	const results = $derived(isOpen ? searchTools(query, tools) : []);
 
 	export function open() {
 		query = '';
 		active = 0;
+		isOpen = true;
 		dialog.showModal();
 		input.focus();
 	}
@@ -52,7 +55,12 @@
 <svelte:window onkeydown={globalKey} />
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-<dialog bind:this={dialog} onclick={backdropClose} aria-label="Search tools">
+<dialog
+	bind:this={dialog}
+	onclick={backdropClose}
+	onclose={() => (isOpen = false)}
+	aria-label="Search tools"
+>
 	<div class="inner">
 		<div class="top">
 			<label class="label" for="palette-q">Find a tool</label>

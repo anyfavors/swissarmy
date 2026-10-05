@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeJson } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'json',
@@ -18,6 +17,5 @@ export const meta: ToolMeta = {
 		'rfc8259'
 	],
 	network: false,
-	detect: looksLikeJson,
 	chain: { in: 'text', out: 'text' }
 };

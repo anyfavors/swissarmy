@@ -12,7 +12,6 @@
 	} from './logic';
 
 	/** Inputs above this size are not written to the URL. */
-	const HASH_LIMIT = 8000;
 
 	let input = $state('');
 	/** The text that was last formatted. Lags `input` by the debounce delay. */
@@ -63,7 +62,7 @@
 
 	$effect(() => {
 		const state = {
-			in: committed.length <= HASH_LIMIT ? committed : undefined,
+			// Input stays out of the URL: configs and data dumps often hold secrets or personal data.
 			ind: indent === 2 ? undefined : String(indent),
 			sort: sortKeys ? '1' : undefined
 		};
@@ -154,8 +153,8 @@
 
 <p class="note">
 	Numbers and strings are kept exactly as written, so large integers and values like
-	<code>1.0</code> survive reformatting. Sorting compares keys by code unit, like most tools. Inputs over
-	8000 characters are not stored in the link.
+	<code>1.0</code> survive reformatting. Sorting compares keys by code unit, like most tools. Your input
+	is never stored in the link, only the options.
 </p>
 
 <style>

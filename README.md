@@ -1,6 +1,6 @@
 # Field Manual
 
-Browser-side utilities at **fm.stephanmh.dev**. Static SvelteKit site, no backend, no analytics.
+Browser-side utilities at **fm.smhansen.dev**. Static SvelteKit site, no backend. Page views are counted by the owner's own statistics service (t.vo.rs), path only.
 Every tool runs in the browser; the few that need the network (DNS over HTTPS) say so and only
 contact hosts allowed by the Content-Security-Policy.
 
@@ -26,12 +26,13 @@ Node 22 (see `.nvmrc`). If a fresh `npm install` without a lockfile fails with
 
 Each tool is one folder under `src/lib/tools/<id>/`:
 
-| File            | Purpose                                                                                                                                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `meta.ts`       | id, chapter/section (the manual number, e.g. FM 2-01), title, summary, search keywords, `network`, optional `detect()` for the intake field and `chain` for future chaining |
-| `logic.ts`      | Pure functions, no DOM. This is what gets tested and what chaining will call                                                                                                |
-| `logic.test.ts` | Tests, preferably against published test vectors (RFCs)                                                                                                                     |
-| `Tool.svelte`   | The UI. Read initial state with `readHash()` and write it back with `writeHash()`                                                                                           |
+| File                   | Purpose                                                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta.ts`              | id, chapter/section (the manual number, e.g. FM 2-01), title, summary, search keywords, `network`, `chain`. No imports from logic: every page loads all metas |
+| `intake.ts` (optional) | `export { fn as detect }` returning 0 to 1 for how likely pasted text belongs here. Loaded lazily by the front page intake only                               |
+| `logic.ts`             | Pure functions, no DOM. This is what gets tested and what chaining will call                                                                                  |
+| `logic.test.ts`        | Tests, preferably against published test vectors (RFCs)                                                                                                       |
+| `Tool.svelte`          | The UI. Read initial state with `readHash()` and write it back with `writeHash()`                                                                             |
 
 The registry (`src/lib/tools/registry.ts`) picks the folder up automatically and a page is prerendered at `/<id>`.
 Chapters are listed in `src/lib/tools/chapters.ts`.
@@ -64,9 +65,15 @@ a connection. Only same-origin GET requests are served from the cache.
 | Build command          | `npm run build`                             |
 | Build output directory | `build`                                     |
 | Environment variable   | `NODE_VERSION=22` (also read from `.nvmrc`) |
-| Custom domain          | `fm.stephanmh.dev`                          |
+| Custom domain          | `fm.smhansen.dev`                           |
 
 Leave Cloudflare Web Analytics off for this project. It injects a script the CSP would block.
+
+### Deploys
+
+Production deploys are triggered by CI: after the `test` job passes on a push to `main`, the
+`deploy` job POSTs to a Cloudflare Pages deploy hook stored in the repository secret
+`CF_DEPLOY_HOOK`. The hook URL is a bearer secret and must never be committed.
 
 ## Design
 

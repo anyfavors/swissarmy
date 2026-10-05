@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { open, setValue, watch } from './helpers';
 
 test.use({ serviceWorkers: 'block' });
@@ -13,6 +13,10 @@ test.describe('intake routes pasted values', () => {
 		['*/15 * * * *', 'cron'],
 		['0xff', 'number-base'],
 		['example.com', 'dns'],
+		['v=spf1 include:_spf.google.com ~all', 'spf'],
+		['CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H', 'cvss'],
+		['S-1-5-21-3623811015-3361044348-30300820-1013', 'sid'],
+		['arn:aws:iam::123456789012:role/admin', 'cloud-id'],
 		[
 			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U',
 			'jwt'
@@ -27,6 +31,18 @@ test.describe('intake routes pasted values', () => {
 			await expect(page.locator('h1')).toBeVisible();
 		});
 	}
+});
+
+test('pasted intake text never goes into the URL', async ({ page }) => {
+	const jwt =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U';
+	const urls: string[] = [];
+	page.on('framenavigated', (f) => urls.push(f.url()));
+	await open(page, '/');
+	await setValue(page, '#intake', jwt);
+	await page.locator('.matches a').first().click();
+	await expect(page.locator('main')).toContainText('1234567890');
+	expect(urls.concat(page.url()).filter((u) => u.includes('eyJ'))).toEqual([]);
 });
 
 test('tokens are not left in the address bar', async ({ page }) => {

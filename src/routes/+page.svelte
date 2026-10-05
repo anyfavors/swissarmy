@@ -1,19 +1,25 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { toc, tools, toolNumber } from '#lib/tools/registry.ts';
+	import { loadDetectors, toc, tools, toolNumber, type Detector } from '#lib/tools/registry.ts';
 	import { detectTools } from '#lib/util/search.ts';
+	import { handOff } from '#lib/util/hash.ts';
 
 	let intake = $state('');
-	const matches = $derived(detectTools(intake, tools));
+	let detectors = $state<Map<string, Detector> | null>(null);
+	const matches = $derived(detectors ? detectTools(intake, tools, detectors) : []);
+
+	// The recognisers are only needed once someone types here, so they load on first input.
+	$effect(() => {
+		if (intake.trim() && !detectors) loadDetectors().then((d) => (detectors = d));
+	});
 
 	function href(id: string) {
-		const value = intake.trim();
-		return resolve('/[tool]', { tool: id }) + (value ? `#in=${encodeURIComponent(value)}` : '');
+		return resolve('/[tool]', { tool: id });
 	}
 </script>
 
 <svelte:head>
-	<title>Field Manual · stephanmh.dev</title>
+	<title>Field Manual · smhansen.dev</title>
 	<meta
 		name="description"
 		content="Browser-side utilities for encoding, networking, time, security and more. Nothing leaves your browser."
@@ -43,14 +49,14 @@
 			<ol class="matches" aria-live="polite">
 				{#each matches as m (m.tool.id)}
 					<li>
-						<a class="btn" href={href(m.tool.id)}>
+						<a class="btn" href={href(m.tool.id)} onclick={() => handOff(intake.trim())}>
 							<span class="no">{toolNumber(m.tool)}</span>
 							{m.tool.title}
 						</a>
 					</li>
 				{/each}
 			</ol>
-		{:else}
+		{:else if detectors}
 			<p class="note" aria-live="polite">No entry recognises this yet. Try the search (Ctrl K).</p>
 		{/if}
 	{/if}

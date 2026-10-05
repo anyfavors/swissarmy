@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeDateRange } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'date-diff',
@@ -23,6 +22,5 @@ export const meta: ToolMeta = {
 		'denmark',
 		'easter'
 	],
-	network: false,
-	detect: looksLikeDateRange
+	network: false
 };

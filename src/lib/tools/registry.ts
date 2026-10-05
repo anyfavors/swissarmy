@@ -27,3 +27,17 @@ export function chapterTitle(no: number): string {
 }
 
 export const toc = chapters.map((c) => ({ ...c, tools: tools.filter((t) => t.chapter === c.no) }));
+
+export type Detector = (input: string) => number;
+const detectorModules = import.meta.glob<{ detect: Detector }>('./*/intake.ts');
+
+/** Loads every tool's intake detector. Only the front page needs these. */
+export async function loadDetectors(): Promise<Map<string, Detector>> {
+	const entries = await Promise.all(
+		Object.entries(detectorModules).map(async ([path, load]) => {
+			const id = path.split('/')[1];
+			return [id, (await load()).detect] as const;
+		})
+	);
+	return new Map(entries);
+}

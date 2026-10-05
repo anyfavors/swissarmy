@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeDuration } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'date-add',
@@ -23,6 +22,5 @@ export const meta: ToolMeta = {
 		'arbejdsdage',
 		'deadline'
 	],
-	network: false,
-	detect: looksLikeDuration
+	network: false
 };

@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test('every page works offline after the first visit', async ({ page, context, browserName }) => {
 	test.skip(browserName !== 'chromium');
