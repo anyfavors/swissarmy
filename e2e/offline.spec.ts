@@ -26,3 +26,22 @@ test('every page works offline after the first visit', async ({ page, context, b
 	await page.getByRole('button', { name: 'Passphrase' }).click();
 	await expect(page.locator('main')).toContainText(/\d+(\.\d+)? bits/);
 });
+
+test('a new deploy is shown on the next load, not a cached page', async ({
+	page,
+	context,
+	browserName
+}) => {
+	test.skip(browserName !== 'chromium');
+	await page.goto('/');
+	await page.evaluate(() => navigator.serviceWorker.ready);
+	await page.reload();
+	await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+
+	// Simulate a newer deploy of /cidr: the service worker must ask the network before its cache.
+	await context.route('**/cidr', (route) =>
+		route.fulfill({ status: 200, contentType: 'text/html', body: '<h1>Fresh deploy</h1>' })
+	);
+	await page.goto('/cidr');
+	await expect(page.locator('h1')).toHaveText('Fresh deploy');
+});

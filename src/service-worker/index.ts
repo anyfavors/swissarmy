@@ -37,17 +37,23 @@ self.addEventListener('fetch', (event) => {
 	const url = new URL(req.url);
 	if (url.origin !== self.location.origin) return;
 
+	// Pages: network first, so a new deploy shows up on the next load. The cache only answers
+	// when the network fails (offline). Hashed build assets never change, so cache first is safe.
+	const isPage = req.mode === 'navigate';
+
 	event.respondWith(
 		(async () => {
 			const cache = await caches.open(CACHE);
-			// Prerendered pages are stored without the .html suffix or trailing slash.
-			const hit =
+			const cached = async () =>
 				(await cache.match(req, { ignoreSearch: true })) ?? (await cache.match(url.pathname));
-			if (hit) return hit;
+			if (!isPage) {
+				const hit = await cached();
+				if (hit) return hit;
+			}
 			try {
 				return await fetch(req);
 			} catch {
-				return (await cache.match(scope)) ?? Response.error();
+				return (await cached()) ?? (await cache.match(scope)) ?? Response.error();
 			}
 		})()
 	);
