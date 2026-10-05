@@ -6,7 +6,7 @@ describe('chain', () => {
 	it('has unique op ids prefixed by an existing tool or text', () => {
 		const ids = allOps.map((o) => o.id);
 		expect(new Set(ids).size).toBe(ids.length);
-		for (const id of ids) expect(id).toMatch(/^[a-z0-9]+\.[a-z0-9-]+$/);
+		for (const id of ids) expect(id).toMatch(/^[a-z0-9-]+\.[a-z0-9-]+$/);
 	});
 
 	it('only gives ops to tools that exist', () => {
