@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeGuid } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'guid',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'generate'
 	],
 	network: false,
-	detect: looksLikeGuid,
 	chain: { in: 'text', out: 'text' }
 };

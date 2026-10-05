@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCertificate } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'certificate',
@@ -21,6 +20,5 @@ export const meta: ToolMeta = {
 		'chain',
 		'fingerprint'
 	],
-	network: false,
-	detect: looksLikeCertificate
+	network: false
 };

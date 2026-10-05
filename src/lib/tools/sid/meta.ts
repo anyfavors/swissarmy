@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeSid } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'sid',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'entra id'
 	],
 	network: false,
-	detect: looksLikeSid,
 	chain: { in: 'text', out: 'text' }
 };

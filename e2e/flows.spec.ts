@@ -13,6 +13,10 @@ test.describe('intake routes pasted values', () => {
 		['*/15 * * * *', 'cron'],
 		['0xff', 'number-base'],
 		['example.com', 'dns'],
+		['v=spf1 include:_spf.google.com ~all', 'spf'],
+		['CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H', 'cvss'],
+		['S-1-5-21-3623811015-3361044348-30300820-1013', 'sid'],
+		['arn:aws:iam::123456789012:role/admin', 'cloud-id'],
 		[
 			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U',
 			'jwt'

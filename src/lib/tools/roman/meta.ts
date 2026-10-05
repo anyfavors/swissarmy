@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeRoman } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'roman',
@@ -20,6 +19,5 @@ export const meta: ToolMeta = {
 		'subtractive'
 	],
 	network: false,
-	detect: looksLikeRoman,
 	chain: { in: 'text', out: 'text' }
 };

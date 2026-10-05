@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCheckDigit } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'check-digits',
@@ -27,6 +26,5 @@ export const meta: ToolMeta = {
 		'personnummer'
 	],
 	network: false,
-	detect: looksLikeCheckDigit,
 	chain: { in: 'text', out: 'text' }
 };

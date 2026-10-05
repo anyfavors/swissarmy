@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCron } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'cron',
@@ -20,6 +19,5 @@ export const meta: ToolMeta = {
 		'next run',
 		'dst'
 	],
-	network: false,
-	detect: looksLikeCron
+	network: false
 };

@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeWindowsTime } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'windows-time',
@@ -30,6 +29,5 @@ export const meta: ToolMeta = {
 		'w32tm'
 	],
 	network: false,
-	detect: looksLikeWindowsTime,
 	chain: { in: 'text', out: 'text' }
 };

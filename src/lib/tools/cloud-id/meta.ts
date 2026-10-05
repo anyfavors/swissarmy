@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCloudId } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'cloud-id',
@@ -21,6 +20,5 @@ export const meta: ToolMeta = {
 		's3',
 		'iam'
 	],
-	network: false,
-	detect: looksLikeCloudId
+	network: false
 };

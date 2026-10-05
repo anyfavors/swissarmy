@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeOtpauth } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'totp',
@@ -20,6 +19,5 @@ export const meta: ToolMeta = {
 		'rfc4226',
 		'base32'
 	],
-	network: false,
-	detect: looksLikeOtpauth
+	network: false
 };

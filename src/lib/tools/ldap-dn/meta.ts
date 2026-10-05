@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeDn } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'ldap-dn',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'ldap injection'
 	],
 	network: false,
-	detect: looksLikeDn,
 	chain: { in: 'text', out: 'text' }
 };

@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksSuspicious } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'unicode',
@@ -26,6 +25,5 @@ export const meta: ToolMeta = {
 		'emoji'
 	],
 	network: false,
-	detect: looksSuspicious,
 	chain: { in: 'text', out: 'text' }
 };

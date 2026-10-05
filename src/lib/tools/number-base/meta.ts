@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeBaseLiteral } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'number-base',
@@ -20,6 +19,5 @@ export const meta: ToolMeta = {
 		'signed',
 		'unsigned'
 	],
-	network: false,
-	detect: looksLikeBaseLiteral
+	network: false
 };

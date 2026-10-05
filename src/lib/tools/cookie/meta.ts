@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCookie } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'cookie',
@@ -23,6 +22,5 @@ export const meta: ToolMeta = {
 		'rfc6265',
 		'session'
 	],
-	network: false,
-	detect: looksLikeCookie
+	network: false
 };

@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeSshKey } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'ssh-key',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'certificate',
 		'md5'
 	],
-	network: false,
-	detect: looksLikeSshKey
+	network: false
 };

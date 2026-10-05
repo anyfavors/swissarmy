@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeDomain } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'dns',
@@ -28,6 +27,5 @@ export const meta: ToolMeta = {
 	network: {
 		hosts: ['cloudflare-dns.com', 'dns.google'],
 		purpose: 'the name and record type you look up, to the one resolver you pick'
-	},
-	detect: looksLikeDomain
+	}
 };

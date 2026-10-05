@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCvss } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'cvss',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'nvd',
 		'v4'
 	],
-	network: false,
-	detect: looksLikeCvss
+	network: false
 };

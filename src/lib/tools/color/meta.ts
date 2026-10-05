@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeColor } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'color',
@@ -25,6 +24,5 @@ export const meta: ToolMeta = {
 		'picker'
 	],
 	network: false,
-	detect: looksLikeColor,
 	chain: { in: 'text', out: 'text' }
 };

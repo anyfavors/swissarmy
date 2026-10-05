@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeDmarc } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'dmarc',
@@ -23,6 +22,5 @@ export const meta: ToolMeta = {
 	network: {
 		hosts: ['cloudflare-dns.com', 'dns.google'],
 		purpose: 'the _dmarc name you look up, only when you press Look up'
-	},
-	detect: looksLikeDmarc
+	}
 };

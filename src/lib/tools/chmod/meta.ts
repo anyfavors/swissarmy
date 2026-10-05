@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeMode } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'chmod',
@@ -23,6 +22,5 @@ export const meta: ToolMeta = {
 		'ls -l'
 	],
 	network: false,
-	detect: looksLikeMode,
 	chain: { in: 'text', out: 'text' }
 };

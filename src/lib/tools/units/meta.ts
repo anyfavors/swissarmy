@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeQuantity } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'units',
@@ -33,6 +32,5 @@ export const meta: ToolMeta = {
 		'knots',
 		'mbps'
 	],
-	network: false,
-	detect: looksLikeQuantity
+	network: false
 };

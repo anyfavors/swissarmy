@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeCsp } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'csp',
@@ -21,6 +20,5 @@ export const meta: ToolMeta = {
 		'clickjacking',
 		'security headers'
 	],
-	network: false,
-	detect: looksLikeCsp
+	network: false
 };

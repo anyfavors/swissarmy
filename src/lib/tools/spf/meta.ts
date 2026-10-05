@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeSpf } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'spf',
@@ -24,6 +23,5 @@ export const meta: ToolMeta = {
 	network: {
 		hosts: ['cloudflare-dns.com', 'dns.google'],
 		purpose: 'the TXT, A and MX names of the domain and its includes, only when you press Look up'
-	},
-	detect: looksLikeSpf
+	}
 };

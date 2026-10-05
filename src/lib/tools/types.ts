@@ -22,11 +22,8 @@ export interface ToolMeta {
 	summary: string;
 	keywords: string[];
 	network: NetworkUse;
-	/**
-	 * Optional: how likely it is that a pasted value is meant for this tool, 0 to 1.
-	 * Used by the intake field on the front page. Keep it cheap, it runs on every keystroke.
-	 */
-	detect?: (input: string) => number;
+	// Recognising pasted input: put `export { fn as detect }` in an intake.ts next to meta.ts.
+	// It returns 0 to 1 and is loaded lazily by the front page only.
 	/** Declared for future chaining. Tools that take and return a single value of a kind. */
 	chain?: { in: ValueKind; out: ValueKind };
 }

@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { toc, tools, toolNumber } from '#lib/tools/registry.ts';
+	import { loadDetectors, toc, tools, toolNumber, type Detector } from '#lib/tools/registry.ts';
 	import { detectTools } from '#lib/util/search.ts';
 	import { handOff } from '#lib/util/hash.ts';
 
 	let intake = $state('');
-	const matches = $derived(detectTools(intake, tools));
+	let detectors = $state<Map<string, Detector> | null>(null);
+	const matches = $derived(detectors ? detectTools(intake, tools, detectors) : []);
+
+	// The recognisers are only needed once someone types here, so they load on first input.
+	$effect(() => {
+		if (intake.trim() && !detectors) loadDetectors().then((d) => (detectors = d));
+	});
 
 	function href(id: string) {
 		return resolve('/[tool]', { tool: id });
@@ -50,7 +56,7 @@
 					</li>
 				{/each}
 			</ol>
-		{:else}
+		{:else if detectors}
 			<p class="note" aria-live="polite">No entry recognises this yet. Try the search (Ctrl K).</p>
 		{/if}
 	{/if}

@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeUrlEncoded } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'url-encoding',
@@ -18,6 +17,5 @@ export const meta: ToolMeta = {
 		'rfc3986'
 	],
 	network: false,
-	detect: looksLikeUrlEncoded,
 	chain: { in: 'text', out: 'text' }
 };

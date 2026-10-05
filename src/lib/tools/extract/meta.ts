@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksDefanged } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'extract',
@@ -26,6 +25,5 @@ export const meta: ToolMeta = {
 		'refang'
 	],
 	network: false,
-	detect: looksDefanged,
 	chain: { in: 'text', out: 'text' }
 };

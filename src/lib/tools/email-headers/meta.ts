@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeHeaders } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'email-headers',
@@ -24,6 +23,5 @@ export const meta: ToolMeta = {
 		'rfc2047',
 		'mail trace'
 	],
-	network: false,
-	detect: looksLikeHeaders
+	network: false
 };

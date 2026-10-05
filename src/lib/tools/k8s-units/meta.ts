@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeResources } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'k8s-units',
@@ -24,6 +23,5 @@ export const meta: ToolMeta = {
 		'burstable',
 		'besteffort'
 	],
-	network: false,
-	detect: looksLikeResources
+	network: false
 };

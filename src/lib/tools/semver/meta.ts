@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeSemver } from './detect';
 
 export const meta: ToolMeta = {
 	id: 'semver',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'sort'
 	],
 	network: false,
-	detect: looksLikeSemver,
 	chain: { in: 'text', out: 'text' }
 };

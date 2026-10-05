@@ -1,5 +1,4 @@
 import type { ToolMeta } from '../types';
-import { looksLikeIp } from './logic';
 
 export const meta: ToolMeta = {
 	id: 'ip',
@@ -22,6 +21,5 @@ export const meta: ToolMeta = {
 		'6to4',
 		'nat64'
 	],
-	network: false,
-	detect: looksLikeIp
+	network: false
 };
