@@ -285,3 +285,11 @@ button[aria-pressed='true'] {
 	clip-path: inset(50%);
 	white-space: nowrap;
 }
+
+/*
+ * Labels and buttons are uppercased, which turns µ into Greek capital Mu (reads as M) and
+ * τ into T, and makes l and I identical. Wrap such text in .keep-case.
+ */
+.keep-case {
+	text-transform: none;
+}

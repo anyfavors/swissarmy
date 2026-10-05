@@ -42,6 +42,7 @@ Rules that keep the site honest:
 - `network: false` means the tool makes no requests. A tool that does must list the hosts in `meta.network`
   and in `connectSrc` in `scripts/csp.js`, and must only send on an explicit button press.
 - No inline `style="..."` attributes and no inline scripts. The CSP blocks them. Use classes.
+- Labels, buttons and `dt` are uppercased; wrap units like µF or τ and look-alike characters (l, I) in `.keep-case`.
 - Never write secrets (tokens, keys, passwords, certificates) to the URL fragment.
 - Import from `#lib/...` with the file extension (`#lib/util/hash.ts`), as SvelteKit 3 requires.
 
