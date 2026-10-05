@@ -34,7 +34,7 @@
 	let preset = $state<Preset>('text');
 	let ecl = $state<Ecl>('M');
 	let scale = $state(10);
-	let text = $state('https://fm.stephanmh.dev/');
+	let text = $state('https://fm.smhansen.dev/');
 	let wifi = $state({ ssid: '', password: '', auth: 'WPA' as WifiAuth, hidden: false });
 	let vcard = $state<VCard>({
 		first: '',

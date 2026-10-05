@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { open, setValue, watch } from './helpers';
 
 test.use({ serviceWorkers: 'block' });

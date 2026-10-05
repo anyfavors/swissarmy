@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>Field Manual · stephanmh.dev</title>
+	<title>Field Manual · smhansen.dev</title>
 	<meta
 		name="description"
 		content="Browser-side utilities for encoding, networking, time, security and more. Nothing leaves your browser."

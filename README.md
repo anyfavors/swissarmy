@@ -1,6 +1,6 @@
 # Field Manual
 
-Browser-side utilities at **fm.stephanmh.dev**. Static SvelteKit site, no backend, no analytics.
+Browser-side utilities at **fm.smhansen.dev**. Static SvelteKit site, no backend. Page views are counted by the owner's own statistics service (t.vo.rs), path only.
 Every tool runs in the browser; the few that need the network (DNS over HTTPS) say so and only
 contact hosts allowed by the Content-Security-Policy.
 
@@ -65,7 +65,7 @@ a connection. Only same-origin GET requests are served from the cache.
 | Build command          | `npm run build`                             |
 | Build output directory | `build`                                     |
 | Environment variable   | `NODE_VERSION=22` (also read from `.nvmrc`) |
-| Custom domain          | `fm.stephanmh.dev`                          |
+| Custom domain          | `fm.smhansen.dev`                           |
 
 Leave Cloudflare Web Analytics off for this project. It injects a script the CSP would block.
 

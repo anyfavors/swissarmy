@@ -34,14 +34,26 @@ function announcerStyleHash() {
  *
  * Adding a network tool: add its host to connect-src here AND list it in the tool's meta.network.
  */
+/**
+ * Page-view statistics (the owner's own analytics instance). It loads one script and posts
+ * page views back to the same host; the tag in src/app.html excludes query and fragment,
+ * because tool input can live in the fragment.
+ */
+export const analyticsOrigin = 'https://t.vo.rs';
+
 /** @type {NonNullable<CspDirectives['connect-src']>} */
-export const connectSrc = ['self', 'https://cloudflare-dns.com', 'https://dns.google'];
+export const connectSrc = [
+	'self',
+	'https://cloudflare-dns.com',
+	'https://dns.google',
+	analyticsOrigin
+];
 
 /** Directives that can be delivered in a <meta> tag. SvelteKit adds script hashes to script-src. */
 /** @type {CspDirectives} */
 export const metaDirectives = {
 	'default-src': ['none'],
-	'script-src': ['self'],
+	'script-src': ['self', analyticsOrigin],
 	'style-src': ['self', 'unsafe-hashes', announcerStyleHash()],
 	'img-src': ['self', 'data:', 'blob:'],
 	'font-src': ['self'],

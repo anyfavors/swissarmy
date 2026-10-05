@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 import { pages, watch } from './helpers';
 
 test.use({ serviceWorkers: 'block' });
@@ -29,6 +29,8 @@ test('sends the security headers', async ({ request }) => {
 	const res = await request.get('/');
 	const csp = res.headers()['content-security-policy'];
 	expect(csp).toContain("frame-ancestors 'none'");
-	expect(csp).toContain("connect-src 'self' https://cloudflare-dns.com https://dns.google");
+	expect(csp).toContain(
+		"connect-src 'self' https://cloudflare-dns.com https://dns.google https://t.vo.rs"
+	);
 	expect(res.headers()['x-content-type-options']).toBe('nosniff');
 });

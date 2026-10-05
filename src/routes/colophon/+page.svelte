@@ -8,34 +8,45 @@
 
 	<h2><span class="sec">§1</span> Everything runs locally</h2>
 	<p>
-		Every tool is plain JavaScript running in your browser. There is no backend, no analytics and no
-		cookies. Input is kept in the URL fragment (the part after <code>#</code>) so links can be
-		shared; browsers never send the fragment to a server. Tokens, keys, passwords and certificates
-		are never written there.
+		Every tool is plain JavaScript running in your browser. There is no backend and no cookies.
+		Input is kept in the URL fragment (the part after <code>#</code>) so links can be shared;
+		browsers never send the fragment to a server. Tokens, keys, passwords and certificates are never
+		written there.
 	</p>
 
 	<h2><span class="sec">§2</span> The browser enforces it</h2>
 	<p>
-		The site ships a Content-Security-Policy that limits outgoing connections to this site plus the
-		DNS-over-HTTPS resolvers <code>cloudflare-dns.com</code> and <code>dns.google</code>. Any other
-		request is blocked by the browser itself, so a bug or a compromised dependency cannot quietly
-		send data elsewhere.
+		The site ships a Content-Security-Policy that limits outgoing connections to this site, the
+		DNS-over-HTTPS resolvers <code>cloudflare-dns.com</code> and <code>dns.google</code>, and the
+		statistics service in §4. Any other request is blocked by the browser itself, so a bug or a
+		compromised dependency cannot quietly send data elsewhere.
 	</p>
 
 	<h2><span class="sec">§3</span> Network use is marked</h2>
 	<p>
-		A tool that needs the network (currently only the DNS lookup) carries a <strong>Network</strong>
+		A tool that needs the network (the DNS lookup and the SPF and DMARC checks) carries a <strong
+			>Network</strong
+		>
 		stamp naming the host and what is sent. It only makes the request when you press its button, never
 		while you type. Every other tool carries a <strong>Local only</strong> stamp.
 	</p>
 
-	<h2><span class="sec">§4</span> Works offline</h2>
+	<h2><span class="sec">§4</span> Page-view statistics</h2>
 	<p>
-		After your first visit the whole manual is stored by your browser, so every tool except the DNS
-		lookup works without a connection. You can also install it as an app from the browser menu.
+		The site counts page views with a self-hosted statistics service at <code>t.vo.rs</code>. It
+		receives the page path (for example <code>/cidr</code>), never the part after <code>?</code> or
+		<code>#</code>, and never anything you type into a tool. A content blocker that blocks it does
+		not affect the tools.
 	</p>
 
-	<h2><span class="sec">§5</span> Type</h2>
+	<h2><span class="sec">§5</span> Works offline</h2>
+	<p>
+		After your first visit the whole manual is stored by your browser, so every tool except the
+		network lookups works without a connection. You can also install it as an app from the browser
+		menu.
+	</p>
+
+	<h2><span class="sec">§6</span> Type</h2>
 	<p>
 		Set in Atkinson Hyperlegible Next and Atkinson Hyperlegible Mono by the Braille Institute,
 		chosen because they keep 0/O, 1/l/I and rn/m apart. Fonts are served from this site.

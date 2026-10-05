@@ -44,7 +44,7 @@
 			<span class="fm">FM</span>
 			<span class="name">
 				<strong>Field Manual</strong>
-				<span class="label">stephanmh.dev</span>
+				<span class="label">smhansen.dev</span>
 			</span>
 		</a>
 		<nav class="row" aria-label="Site">
